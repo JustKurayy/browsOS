@@ -28,6 +28,10 @@ let boot = { //applies localstorage information into OS.
 	xad0110: ""
 }
 
+showLog(`browsOS is a browser forwarder. 
+It is a fake operating system for browsers to forward to different sites. <br>
+Most functions have to use, like the login, and are only there for unidentified reasons.`)
+
 function clickPress(event) {
 	input = document.querySelector('.command-input').value;
     if (event.key == 'Enter') {
@@ -60,6 +64,8 @@ function clickPress(event) {
 					'<label for="input" class="input-tag-3">$</label>' +
 					'<input type="password" class="password" onkeydown="loginSys(event)">');
 					break;
+				case ".forward":
+					window.open('_blank', forwarder);
 				default:
 					showLog('<p class="console">Command not found</p>');
 					input = '';
