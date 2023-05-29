@@ -3,9 +3,29 @@ let lastInput;
 let userSettings = {
 	username: 'admin',
 	password: 'admin',
-	terminalBG: '#333333',
+	terminalBG: '#111212',
 	terminalTC: '#00ff00',
-	loggedIniInputStyle: 1
+	loggedIniInputStyle: 0
+}
+
+let x0mem = { //available memory list. Used for storing information and then dumping it into the localstorage.
+	x00000: "",
+	x00001: "",
+	x00002: "",
+	x00003: "",
+	x00005: "",
+	x00006: "",
+	x00007: "",
+	x00008: "",
+	x00009: "",
+	x00010: ""
+	//continue for more memory
+}
+
+let boot = { //applies localstorage information into OS.
+	xm00000: "",
+	xae0001: "",
+	xad0110: ""
 }
 
 function clickPress(event) {
@@ -74,12 +94,28 @@ function loginSys(event) {
 					document.querySelector('.input-tag').textContent = userSettings.username + '$ ';
 					break;
 			}
+			fillMemory(userSettings.username);
+			fillMemory(userSettings.password);
 		} else {
-			showlog('<p>Fill the form in</p>');
+			showLog('<p>Fill the form in</p>');
 		}
 	}
 }
 
 function applyColors() {
 	//paste css code here for body.background and text color
+}
+
+function fillMemory(data) {
+	if (x0mem.x00000 == "") {
+		x0mem.x00000 = data;
+		window.localStorage.setItem("username", x0mem.x00000);
+		showLog("<br>" + x0mem.x00000);
+	} else if (x0mem.x00001 == "") {
+		x0mem.x00001 = data;
+		showLog("<br>" + x0mem.x00001);
+	} else {
+		x0mem.x00002 = data;
+		showLog("<br>" + x0mem.x00002);
+	}
 }
